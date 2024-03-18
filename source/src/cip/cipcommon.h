@@ -216,4 +216,17 @@ EipStatus CipResetService(CipInstance *RESTRICT const instance,
     const struct sockaddr *originator_address,
     const int encapsulation_session);
 
+/*
+    If Ethernet is enabled, add acl rule of ethernetip
+    Call ACL API.
+    Ensure that TCP broadcast packet can be processed
+*/
+EipStatus CipAddACL_EthernetIP();
+
+/*
+    If Ethernet is disabled, delete acl rule of ethernetip
+    Call ACL API.
+*/
+EipStatus CipDeleteACL_EthernetIP();
+
 #endif /* OPENER_CIPCOMMON_H_ */

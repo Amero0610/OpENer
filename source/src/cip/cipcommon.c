@@ -77,6 +77,9 @@ EipStatus CipStackInit(const EipUint16 unique_connection_id) {
   OPENER_ASSERT(kEipStatusOk == eip_status);
 #endif
 
+  /* Add acl rule */
+  CipAddACL_EthernetIP();
+
   /* the application has to be initialized at last */
   eip_status = ApplicationInitialization();
   OPENER_ASSERT(kEipStatusOk == eip_status);
@@ -93,6 +96,12 @@ void ShutdownCipStack(void) {
   ShutdownAssemblies();
 
   ShutdownTcpIpInterface();
+ 
+  /*  Delete acl rule  */
+  CipDeleteACL_EthernetIP();
+
+
+  
 
   /*no clear all the instances and classes */
   DeleteAllClasses();
@@ -1615,3 +1624,22 @@ size_t CalculateIndex(EipUint16 attribute_number) {
   size_t index = attribute_number / 8;
   return index;
 }
+
+EipStatus CipAddACL_EthernetIP()
+{
+    /*
+        TODO: Call ACL API add rule, if ethernet/ip is enabled 
+        port: 44818 0xAF12
+        Type: broadcast packet 
+    */
+}
+
+
+EipStatus CipDeleteACL_EthernetIP()
+{
+    /* 
+       TODO:  Call ACL API delete rule
+       port: 44818 0xAF12
+    */
+}
+
